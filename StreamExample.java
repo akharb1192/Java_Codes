@@ -51,5 +51,15 @@ public class StreamExample
 		
 	List<String> list = Arrays.asList("Geeks", "GFG","GeeksforGeeks", "gfg"); 
         list.stream().flatMap(str ->Stream.of(str.charAt(2))). forEach(System.out::println); 
+		
+	List<Integer> PrimeNumbers = Arrays.asList(5, 7, 11,13); 
+        List<Integer> OddNumbers = Arrays.asList(1, 3, 5); 
+        List<Integer> EvenNumbers = Arrays.asList(2, 4, 6, 8); 
+        List<List<Integer>> listOfListofInts = 
+        Arrays.asList(PrimeNumbers, OddNumbers, EvenNumbers); 
+        System.out.println("The Structure before flattening is : " +  listOfListofInts); 
+        List<Integer> listofInts  = listOfListofInts.stream().flatMap(list -> list.stream()).sorted()
+                                    .collect(Collectors.toList());
+        System.out.println("The Structure after flattening is : " + listofInts);
 	}
 }
