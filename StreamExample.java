@@ -61,5 +61,12 @@ public class StreamExample
         List<Integer> listofInts  = listOfListofInts.stream().flatMap(list -> list.stream()).sorted()
                                     .collect(Collectors.toList());
         System.out.println("The Structure after flattening is : " + listofInts);
+		
+	
+	String myName[]=new String[]{"ankitkharb","raman"};
+		for(String a:myName)
+		{
+        int c=(int)Stream.of(a).map(w->w.split("")).flatMap(Arrays::stream).distinct().count();
+        System.out.println(c);
 	}
 }
