@@ -48,5 +48,8 @@ public class StreamExample
 	String myName="ankitkharb";
         int c1=(int)Stream.of(myName).map(w->w.split("")).flatMap(Arrays::stream).distinct().count();
         System.out.println(c1);
+		
+	List<String> list = Arrays.asList("Geeks", "GFG","GeeksforGeeks", "gfg"); 
+        list.stream().flatMap(str ->Stream.of(str.charAt(2))). forEach(System.out::println); 
 	}
 }
