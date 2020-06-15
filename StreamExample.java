@@ -27,5 +27,8 @@ public class StreamExample
         {
             System.out.println(a.getKey()+"   "+a.getValue());    
         }
+	 Collection<String> list = Arrays.asList("A", "B", "C", "D", "A", "B", "C");
+        List<String> distinctElements = list.stream().distinct().collect(Collectors.toList());
+        System.out.println(distinctElements);
 	}
 }
