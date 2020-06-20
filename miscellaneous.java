@@ -51,3 +51,22 @@ public class Main
 		System.out.println((new StringBuilder(palan)).reverse().toString().equals(palan));
 	}
 }
+//Rotate an array through collections in Java
+class Solution {
+    public void rotate(int[] nums, int k) {
+        if(nums==null)
+        {
+            return;
+        }
+        Integer arr[]=new Integer[nums.length];
+        for(int i=0;i<nums.length;i++)
+        {
+            arr[i]=nums[i];
+        }
+        Collections.rotate(Arrays.asList(arr),k);
+        for(int i=0;i<nums.length;i++)
+        {
+            nums[i]=arr[i];
+        }
+}
+}
