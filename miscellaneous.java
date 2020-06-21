@@ -128,3 +128,31 @@ class Main {
         System.out.println(knapSack(W, wt, val, n)); 
     } 
 } 
+
+//Tree sum equals target
+
+class Solution {
+    public int pathSum(TreeNode node, int target) {
+        Map<Integer, Integer> map = new HashMap();
+        map.put(0, 1);
+        return pathSum(node, target, 0, map);
+    }
+
+    private int pathSum(TreeNode node, int target, int sum, Map<Integer, Integer> map) {
+        if (node == null) {
+            return 0;
+        }
+        sum += node.val;
+        int result = map.getOrDefault(sum - target, 0);
+
+        map.merge(sum, 1, Integer::sum);
+        result += pathSum(node.left, target, sum, map);
+        result += pathSum(node.right, target, sum, map);
+        map.merge(sum, -1, Integer::sum);
+        if (map.get(sum) == 0) { // Remove when 0 to reduce space usage
+            map.remove(sum);
+        }
+
+        return result;
+    }
+}
