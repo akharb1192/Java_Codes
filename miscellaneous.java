@@ -204,3 +204,28 @@ class RandomizedCollection {
         return list.get(index);
     }
 }
+//LIS
+
+public class Solution {
+    public int lengthOfLIS(int[] nums) {
+        int[] sortedArray = new int[nums.length];
+        int size = 0;
+        for (int num : nums) {
+            int start = 0;
+            int end = size; // 1 element past end of our sortedArray
+            while (start != end) {
+                int mid = (start + end) / 2;
+                if (sortedArray[mid] < num) {
+                    start = mid + 1;
+                } else {
+                    end = mid;
+                }
+            }
+            sortedArray[start] = num;
+            if (start == size) {
+                size++;
+            }
+        }
+        return size;
+    }
+}
