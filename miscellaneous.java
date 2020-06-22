@@ -156,3 +156,51 @@ class Solution {
         return result;
     }
 }
+
+//Randomized Set O(1)
+
+class RandomizedCollection {
+    Random rand = new Random();
+    List<Integer> list = new ArrayList();
+    Map<Integer, LinkedHashSet<Integer>> valToIndices = new HashMap();
+
+    public boolean insert(int num) {
+        // update Map
+        if (!valToIndices.containsKey(num)) {
+            valToIndices.put(num, new LinkedHashSet());
+        }
+        valToIndices.get(num).add(list.size());
+
+        // update List
+        list.add(num);
+
+        return valToIndices.get(num).size() == 1;
+    }
+
+    public boolean remove(int num) {
+        if (!valToIndices.containsKey(num) || valToIndices.get(num).isEmpty()) {
+            return false;
+        }
+
+        int indexToRemove = valToIndices.get(num).iterator().next();
+        int valueLast = list.get(list.size() - 1);
+
+        // update List
+        list.set(indexToRemove, valueLast);
+        list.remove(list.size() - 1);
+
+        // update Map: remove overwritten index from set
+        valToIndices.get(num).remove(indexToRemove);
+
+        // update Map: update the moved number's index
+        valToIndices.get(valueLast).add(indexToRemove);                              
+        valToIndices.get(valueLast).remove(list.size());
+
+        return true;
+    }
+
+    public int getRandom() { // will fail if set is empty.
+        int index = rand.nextInt(list.size());
+        return list.get(index);
+    }
+}
