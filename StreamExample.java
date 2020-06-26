@@ -29,6 +29,12 @@ public class StreamExample
 		//prints [ABC, D, EF]
 		
 		
+		Stream<Integer> numbers = Stream.of(1,2,3,4,5);
+		
+		Optional<Integer> intOptional = numbers.reduce((i,j) -> {return i*j;});
+		if(intOptional.isPresent()) System.out.println("Multiplication = "+intOptional.get()); //120
+		
+		
 		Stream<List<String>> namesOriginalList = Stream.of(
 		Arrays.asList("Pankaj"), 
 		Arrays.asList("David", "Lisa"),
