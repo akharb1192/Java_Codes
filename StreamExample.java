@@ -10,6 +10,11 @@ public class StreamExample
 		
 		String[] names=new String[]{"Ankit,kh","Mohan,kl","Mala,kl,kl","Ankit","Devesh","Madhav","Mahesh","Dhanush","Mahik","Rach","Ram","Deva"};
 		
+		
+		List<Integer> lis=Arrays.asList(1,2,3,5,6,7,8);
+		Arrays.stream(lis.toArray()).sorted().forEach(System.out::println);
+		
+		
 		Arrays.stream(names).filter(x->x.startsWith("D")).sorted().forEach(System.out::println);
 		
 		Arrays.stream(names).map(String::toLowerCase).filter(x->x.startsWith("m")).filter(x->x.endsWith("h")).forEach(System.out::println);
