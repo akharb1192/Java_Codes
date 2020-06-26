@@ -31,6 +31,13 @@ public class StreamExample
 		Stream<Integer> numbers3 = Stream.of(1,2,3,4,5);
 		System.out.println("Stream contains 4? "+numbers3.anyMatch(i -> i==4));
 		//Stream contains 4? true
+		
+		
+		Stream<String> names4 = Stream.of("Pankaj","Amit","David", "Lisa");
+		Optional<String> firstNameWithD = names4.filter(i -> i.startsWith("D")).findFirst();
+		if(firstNameWithD.isPresent()){
+		System.out.println("First Name starting with D="+firstNameWithD.get()); //David
+		}
 
 		Stream<Integer> numbers4 = Stream.of(1,2,3,4,5);
 		System.out.println("Stream contains all elements less than 10? "+numbers4.allMatch(i -> i<10));
