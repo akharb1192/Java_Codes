@@ -14,6 +14,11 @@ public class StreamExample
 		List<Integer> lis=Arrays.asList(1,2,3,5,6,7,8);
 		Arrays.stream(lis.toArray()).sorted().forEach(System.out::println);
 		
+		Stream<Integer> intStream = Stream.of(1,2,3,4);
+		List<Integer> intList = intStream.collect(Collectors.toList());
+		System.out.println(intList); //prints [1, 2, 3, 4]
+
+		
 		
 		Arrays.stream(names).filter(x->x.startsWith("D")).sorted().forEach(System.out::println);
 		
