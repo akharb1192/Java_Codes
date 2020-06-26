@@ -21,6 +21,12 @@ public class StreamExample
 		intStream = Stream.of(1,2,3,4); //stream is closed, so we need to create it again
 		Map<Integer,Integer> intMap = intStream.collect(Collectors.toMap(i -> i, i -> i+10));
 		System.out.println(intMap); //prints {1=11, 2=12, 3=13, 4=14}
+		
+		Stream<String> names = Stream.of("aBc", "d", "ef");
+		System.out.println(names.map(s -> {
+		return s.toUpperCase();
+		}).collect(Collectors.toList()));
+		//prints [ABC, D, EF]
 
 		
 		
