@@ -304,3 +304,29 @@ public class Solution {
     }
 }
 
+//Sort by Value HashMap
+
+import java.util.*;
+import java.util.stream.*;
+import java.util.Map.Entry;
+
+public class Main
+{
+	public static void main(String[] args) {
+		String str="aaannkkiitttt";
+		Map<Character,Integer> hmap=new HashMap<Character,Integer>();
+		for(char a:str.toCharArray())
+		{
+		    hmap.merge(a,1,Integer::sum);
+		}
+		LinkedHashMap<Character, Integer> sortedMap = 
+        hmap.entrySet().stream().
+        sorted(Entry.comparingByValue(Collections.reverseOrder())).
+        collect(Collectors.toMap(Entry::getKey, Entry::getValue,
+                             (e1, e2) -> e1, LinkedHashMap::new));
+		System.out.println(sortedMap);
+		
+	}
+}
+
+
