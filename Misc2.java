@@ -331,3 +331,166 @@ class Solution {
         return new String(content);
     }
 }
+
+
+class Node 
+{ 
+	int data; 
+	Node left, right; 
+
+	Node(int item) 
+	{ 
+		data = item; 
+		left = right = null; 
+	} 
+} 
+
+class BinaryTree 
+{ 
+	Node root; 
+
+	// Convert a given tree to a tree where every node contains sum of 
+	// values of nodes in left and right subtrees in the original tree 
+	int toSumTree(Node node) 
+	{ 
+		// Base case 
+		if (node == null) 
+			return 0; 
+
+		// Store the old value 
+		int old_val = node.data; 
+
+		// Recursively call for left and right subtrees and store the sum 
+		// as new value of this node 
+		node.data = toSumTree(node.left) + toSumTree(node.right); 
+
+		// Return the sum of values of nodes in left and right subtrees 
+		// and old_value of this node 
+		return node.data + old_val; 
+	} 
+
+	// A utility function to print inorder traversal of a Binary Tree 
+	void printInorder(Node node) 
+	{ 
+		if (node == null) 
+			return; 
+		printInorder(node.left); 
+		System.out.print(node.data + " "); 
+		printInorder(node.right); 
+	} 
+
+	/* Driver function to test above functions */
+	public static void main(String args[]) 
+	{ 
+		BinaryTree tree = new BinaryTree(); 
+
+		/* Constructing tree given in the above figure */
+		tree.root = new Node(10); 
+		tree.root.left = new Node(-2); 
+		tree.root.right = new Node(6); 
+		tree.root.left.left = new Node(8); 
+		tree.root.left.right = new Node(-4); 
+		tree.root.right.left = new Node(7); 
+		tree.root.right.right = new Node(5); 
+
+		tree.toSumTree(tree.root); 
+
+		// Print inorder traversal of the converted tree to test result 
+		// of toSumTree() 
+		System.out.println("Inorder Traversal of the resultant tree is:"); 
+		tree.printInorder(tree.root); 
+	} 
+}
+
+
+
+import java.util.ArrayList; 
+import java.util.LinkedList; 
+import java.util.List; 
+
+class Graph { 
+	
+	private final int V; 
+	private final List<List<Integer>> adj; 
+
+	public Graph(int V) 
+	{ 
+		this.V = V; 
+		adj = new ArrayList<>(V); 
+		
+		for (int i = 0; i < V; i++) 
+			adj.add(new LinkedList<>()); 
+	} 
+	
+	// This function is a variation of DFSUtil() in 
+	// https://www.geeksforgeeks.org/archives/18212 
+	private boolean isCyclicUtil(int i, boolean[] visited, 
+									boolean[] recStack) 
+	{ 
+		
+		// Mark the current node as visited and 
+		// part of recursion stack 
+		if (recStack[i]) 
+			return true; 
+
+		if (visited[i]) 
+			return false; 
+			
+		visited[i] = true; 
+
+		recStack[i] = true; 
+		List<Integer> children = adj.get(i); 
+		
+		for (Integer c: children) 
+			if (isCyclicUtil(c, visited, recStack)) 
+				return true; 
+				
+		recStack[i] = false; 
+
+		return false; 
+	} 
+
+	private void addEdge(int source, int dest) { 
+		adj.get(source).add(dest); 
+	} 
+
+	// Returns true if the graph contains a 
+	// cycle, else false. 
+	// This function is a variation of DFS() in 
+	// https://www.geeksforgeeks.org/archives/18212 
+	private boolean isCyclic() 
+	{ 
+		
+		// Mark all the vertices as not visited and 
+		// not part of recursion stack 
+		boolean[] visited = new boolean[V]; 
+		boolean[] recStack = new boolean[V]; 
+		
+		
+		// Call the recursive helper function to 
+		// detect cycle in different DFS trees 
+		for (int i = 0; i < V; i++) 
+			if (isCyclicUtil(i, visited, recStack)) 
+				return true; 
+
+		return false; 
+	} 
+
+	// Driver code 
+	public static void main(String[] args) 
+	{ 
+		Graph graph = new Graph(4); 
+		graph.addEdge(0, 1); 
+		graph.addEdge(0, 2); 
+		graph.addEdge(1, 2); 
+		graph.addEdge(2, 0); 
+		graph.addEdge(2, 3); 
+		graph.addEdge(3, 3); 
+		
+		if(graph.isCyclic()) 
+			System.out.println("Graph contains cycle"); 
+		else
+			System.out.println("Graph doesn't "
+									+ "contain cycle"); 
+	} 
+}
