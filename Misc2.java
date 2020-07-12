@@ -1662,3 +1662,6 @@ public class Main
 		
 	}
 }
+
+
+//preOrder to postOrder and Inorder
