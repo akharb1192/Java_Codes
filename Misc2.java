@@ -1665,3 +1665,62 @@ public class Main
 
 
 //preOrder to postOrder and Inorder
+
+class TreeNode{
+    int data;
+    TreeNode left,right;
+    TreeNode(int d)
+    {
+        data=d;
+        left=right=null;
+    }
+}
+public class Main {
+  static int idx;
+  public static TreeNode bstFromPreorder(int[] preorder) {
+    idx = 0;
+    return helper(preorder, Integer.MIN_VALUE, Integer.MAX_VALUE);
+  }
+  
+  private static TreeNode helper(int[] preorder, int lower, int upper) {
+    if (idx == preorder.length || preorder[idx] < lower || preorder[idx] > upper) {
+      return null;
+    }
+    int val = preorder[idx];
+    idx++;
+    TreeNode root = new TreeNode(val);
+    root.left = helper(preorder, lower, val);
+    root.right = helper(preorder, val, upper);
+    return root;
+  }
+  public static void printInorder(TreeNode root)
+  {
+      if(root!=null)
+      {
+          printInorder(root.left);
+         System.out.print(root.data+" ");
+         printInorder(root.right);
+      }
+  }
+  
+  public static void postOrder(TreeNode root)
+  {
+      if(root!=null)
+      {
+         postOrder(root.left);
+         postOrder(root.right);
+         System.out.print(root.data+" ");
+         
+      }
+  }
+  public static void main(String args[]) 
+{  
+    int pre[] = { 40, 30, 35, 80, 100 };  
+  
+    int n = pre.length;  
+    TreeNode ans=bstFromPreorder(pre);  
+    printInorder(ans);
+    System.out.println();
+    postOrder(ans);
+}  
+} 
