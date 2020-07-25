@@ -358,3 +358,27 @@ class Main {
 } 
 
 
+class Solution {
+    int pIndex = 0, iIndex = 0;
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        
+        return dfs(preorder, inorder, Integer.MAX_VALUE);
+    }
+    
+    private TreeNode dfs(int[] preorder, int[] inorder, int rootVal){
+        
+        if(pIndex == preorder.length){
+            return null;
+        }
+        
+        if(inorder[iIndex] == rootVal){
+            iIndex++;
+            return null;
+        }
+        
+        TreeNode root = new TreeNode(preorder[pIndex++]);
+        root.left = dfs(preorder, inorder, root.val);
+        root.right =dfs(preorder, inorder, rootVal);
+        return root;
+    }
+}
